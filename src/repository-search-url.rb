@@ -1,6 +1,13 @@
 class RepositorySearchURL
 	attr_accessor :size	
+	attr_accessor :forks
+	attr_accessor :fork
+	attr_accessor :pushed
+	attr_accessor :username
 	attr_accessor :language
+	attr_accessor :created
+	attr_accessor :followres
+	attr_accessor :actions
 
 	def search_url
 		criterias = ""
@@ -14,5 +21,9 @@ class RepositorySearchURL
 		end
 
 		"https://github.com/search?&q=#{criterias}&type=Repositories"
+	end
+
+	def single_page_url(page_index)
+		search_url + "&start_value=#{page_index}"
 	end
 end
