@@ -1,5 +1,5 @@
-require './repository-search-url'
-require './repository-scraper'
+require File.dirname(__FILE__) + '/repository-search-url'
+require File.dirname(__FILE__) + '/repository-scraper'
 require 'colorize'
 
 search_url = RepositorySearchURL.new

@@ -1,5 +1,5 @@
 require 'test/unit'
-require '../src/repository-search-url'
+require File.dirname(__FILE__) + '/../src/repository-search-url'
 
 class RepositorySearchURLTests < Test::Unit::TestCase
 	def test_search_language_url
