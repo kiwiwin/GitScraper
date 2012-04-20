@@ -1,12 +1,14 @@
 require 'test/unit'
-require '../src/repository-search-scraper'
-require '../src/repository-search-url'
+require File.dirname(__FILE__) + '/../src/repository-scraper'
+require File.dirname(__FILE__) + '/../src/repository-search-url'
 
 class RepostiorySearchScraperTests < Test::Unit::TestCase
 	def setup
-		@blank_repos_scraper = RepositoryScraper.new(StubRepositorySearchURL.new("./fixture/blank_repository_page.html"))
-		@half_repos_scraper = RepositoryScraper.new(StubRepositorySearchURL.new("./fixture/half_repository_page.html"))
-		@full_repos_scraper = RepositoryScraper.new(StubRepositorySearchURL.new("./fixture/full_repository_page.html"))
+		@fixture_dir = File.dirname(__FILE__) + "/fixture"
+
+		@blank_repos_scraper = RepositoryScraper.new(StubRepositorySearchURL.new("#{@fixture_dir}/blank_repository_page.html"))
+		@half_repos_scraper = RepositoryScraper.new(StubRepositorySearchURL.new("#{@fixture_dir}/half_repository_page.html"))
+		@full_repos_scraper = RepositoryScraper.new(StubRepositorySearchURL.new("#{@fixture_dir}/full_repository_page.html"))
 	end
 
 	def test_blank_repository_number
@@ -26,13 +28,13 @@ class RepostiorySearchScraperTests < Test::Unit::TestCase
 	end
 
 	def test_half_single_page_repositories
-		expected_repos = read_repository_list_from_file("./fixture/half_repository_list")
+		expected_repos = read_repository_list_from_file("#{@fixture_dir}/half_repository_list")
 
 		assert_equal(expected_repos, @half_repos_scraper.single_page_repositories(1))
 	end
 
 	def test_full_single_page_repostiories
-		expected_repos = read_repository_list_from_file("./fixture/full_repository_list")
+		expected_repos = read_repository_list_from_file("#{@fixture_dir}/full_repository_list")
 
 		assert_equal(expected_repos, @full_repos_scraper.single_page_repositories(1))
 	end
@@ -42,13 +44,13 @@ class RepostiorySearchScraperTests < Test::Unit::TestCase
 	end
 
 	def test_half_all_repositories
-		expected_repos = read_repository_list_from_file("./fixture/half_repository_list")
+		expected_repos = read_repository_list_from_file("#{@fixture_dir}/half_repository_list")
 
 		assert_equal(expected_repos, @half_repos_scraper.all_repositories)
 	end
 
 	def test_full_all_repositories
-		expected_repos = read_repository_list_from_file("./fixture/full_repository_list") * 2
+		expected_repos = read_repository_list_from_file("#{@fixture_dir}/full_repository_list") * 2
 
 		assert_array_equal(expected_repos, @full_repos_scraper.all_repositories)
 	end
@@ -66,6 +68,7 @@ class RepostiorySearchScraperTests < Test::Unit::TestCase
 	end
 
 	def read_repository_list_from_file(filename)
+		puts "#####{filename}####"
 		File.open(filename).readlines.collect do |line|
 			line.chomp
 		end
