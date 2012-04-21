@@ -1,0 +1,10 @@
+D       .gitignore
+D       src/repository-clone-init.rb
+D       src/repository-clone.rb
+D       src/repository-scraper-init.rb
+D       src/repository-scraper.rb
+A       src/repository-search-scraper.rb
+D       test/repository-scraper-tests.rb
+A       test/repository-search-scraper-tests.rb
+M       test/repository-search-url-tests.rb
+
