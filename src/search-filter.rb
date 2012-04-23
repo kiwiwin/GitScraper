@@ -1,7 +1,6 @@
-class UserSearchURL
-	attr_accessor :location
+class SearchFilter
 
-	def search_url
+	def criteria
 		criterias = ""
 
 		self.instance_variables.sort.each do |criteria|
@@ -11,7 +10,9 @@ class UserSearchURL
 			
 			criterias += "#{criteria[1..-1]}%3A#{self.instance_variable_get(criteria)}"					
 		end
+		criterias
+	end
 
-		"https://github.com/search?&q=#{criterias}&type=Users"
+	def type
 	end
 end

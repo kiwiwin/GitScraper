@@ -1,14 +1,15 @@
 require 'test/unit'
 require File.dirname(__FILE__) + '/../src/repository-scraper'
-require File.dirname(__FILE__) + '/../src/repository-search-url'
+require File.dirname(__FILE__) + '/../src/repository-filter'
+require File.dirname(__FILE__) + '/stub-search-url'
 
 class RepostiorySearchScraperTests < Test::Unit::TestCase
 	def setup
 		@fixture_dir = File.dirname(__FILE__) + "/fixture"
 
-		@blank_repos_scraper = RepositoryScraper.new(StubRepositorySearchURL.new("#{@fixture_dir}/blank_repository_page.html"))
-		@half_repos_scraper = RepositoryScraper.new(StubRepositorySearchURL.new("#{@fixture_dir}/half_repository_page.html"))
-		@full_repos_scraper = RepositoryScraper.new(StubRepositorySearchURL.new("#{@fixture_dir}/full_repository_page.html"))
+		@blank_repos_scraper = RepositoryScraper.new(StubSearchURL.new("#{@fixture_dir}/blank_repository_page.html"))
+		@half_repos_scraper = RepositoryScraper.new(StubSearchURL.new("#{@fixture_dir}/half_repository_page.html"))
+		@full_repos_scraper = RepositoryScraper.new(StubSearchURL.new("#{@fixture_dir}/full_repository_page.html"))
 	end
 
 	def test_blank_repository_number
@@ -80,19 +81,5 @@ class RepostiorySearchScraperTests < Test::Unit::TestCase
 			|index|
 			assert_equal(expected[index], actual[index], "expected[#{index}] = #{expected[index]}, but actual[#{index}] = #{actual[index]}")
 		}
-	end
-end
-
-class StubRepositorySearchURL < RepositorySearchURL
-	def initialize(filename)
-		@filename = filename
-	end
-
-	def search_url
-		@filename
-	end
-
-	def single_page_url(page_index)
-		@filename
 	end
 end
