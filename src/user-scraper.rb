@@ -10,6 +10,6 @@ class UserScraper < Scraper
 	end
 
 	def element_match
-		%r{<h2\s+class\s*=\s*"title"\s*>\s*<a\s+href\s*=\s*"https://github.com/.*"\s*>\s*(.*)\s*</a\s*>}
+		%r{<h2\s+class\s*=\s*"title"\s*>\s*<a\s+href\s*=\s*"/.*"\s*>\s*(.*)\s*</a\s*>}
 	end
 end

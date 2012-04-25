@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class Scraper
 
 	def initialize(url)
