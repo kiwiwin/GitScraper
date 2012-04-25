@@ -2,4 +2,4 @@
 *.tmp
 /tmp/*
 /data/*
-*-init.rb
+/src/*-init.rb
