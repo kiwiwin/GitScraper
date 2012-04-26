@@ -37,7 +37,6 @@ class CommitsAnalysis
 				version += 1
 			end
 		rescue Exception => ex
-			puts ex.message
 			history.reverse!
 		end
 	end
