@@ -21,7 +21,7 @@ class UserScraperTests < Test::Unit::TestCase
 	end
 
 	def test_full_user_number
-		assert_equal(7721, @full_user_scraper.element_number)
+		assert_equal(7755, @full_user_scraper.element_number)
 	end
 
 	def test_blank_all_users
@@ -59,7 +59,7 @@ class UserScraperTests < Test::Unit::TestCase
 	end
 
 	def test_full_users_page_number
-		assert_equal(258 , @full_user_scraper.page_number)
+		assert_equal(259 , @full_user_scraper.page_number)
 	end
 
 	def read_user_list_from_file(filename)

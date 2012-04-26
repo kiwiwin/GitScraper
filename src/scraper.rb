@@ -25,15 +25,11 @@ class Scraper
 	end
 
 	def all_elements
-		result = []
+		(1..page_number).inject([]){
+			|elements, page_index|
 
-		page_index = 1;
-		while page_index <= page_number
-			result += single_page_elements(page_index)
-			page_index += 1
-		end
-
-		result
+			elements + single_page_elements(page_index)
+		}
 	end
 end
 
