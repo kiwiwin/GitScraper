@@ -1,5 +1,6 @@
 require 'test/unit'
 
+require File.dirname(__FILE__) + "/../src/search-url"
 require File.dirname(__FILE__) + "/../src/user-filter"
 
 class UserSearchURLTests < Test::Unit::TestCase
