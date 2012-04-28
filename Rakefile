@@ -1,8 +1,10 @@
 require 'rubygems'
-require 'rake/testtask'
+require 'spec/rake/spectask'
 
-task :default => [:test]
+task :default => [:spec]
 
-Rake::TestTask.new(:test) do |t|
-	t.test_files = FileList['test/*-tests.rb']
+Spec::Rake::SpecTask.new(:spec) do |t|
+	t.spec_files = Dir.glob('spec/**/*-spec.rb')
+	t.spec_opts << '--format specdoc'
+  	t.rcov = true
 end
