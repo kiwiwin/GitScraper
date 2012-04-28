@@ -65,5 +65,4 @@ describe SearchFilter do
 			@repository_filter.type.should == "Repositories"
 		end	
 	end
-
 end

@@ -12,6 +12,4 @@ class SearchFilter
 		}
 	end
 
-	def type
-	end
 end

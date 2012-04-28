@@ -1,24 +1,12 @@
-require File.dirname(__FILE__) + "/../src/user-scraper"
-require File.dirname(__FILE__) + "/stub-search-url"
+require File.dirname(__FILE__) + "/scraper-tests-helper"
 
 describe UserScraper do
 	
-	def create_scraper_of_stub_url(fixture_name)
-		UserScraper.new(StubSearchURL.new("#{File.dirname(__FILE__)}/fixture/#{fixture_name}_user_page.html")) 
-	end
-
-	def load_user_list(fixture_name)
-		File.open("#{File.dirname(__FILE__)}/fixture/#{fixture_name}_user_list").readlines.collect {
- 			|line|
-			line.chomp
-		}
-	end
-
 	let(:dummy_page_index) {1}
 
 	context "blank user page" do
 		before (:all) do
-			@blank_page_scraper = create_scraper_of_stub_url("blank")
+			@blank_page_scraper = ScraperTestsHelper.create_scraper_of_stub_url("UserScraper", "blank")
 		end
 
 		it "user number is 0" do
@@ -32,13 +20,12 @@ describe UserScraper do
 		it "all users is []" do
 			@blank_page_scraper.all_elements.should == []
 		end
-
 	end
 
 	context "half repositories page" do
 		before (:all) do
-			@half_page_scraper = create_scraper_of_stub_url("half")
-			@half_user_list = load_user_list("half")
+			@half_page_scraper = ScraperTestsHelper.create_scraper_of_stub_url("UserScraper", "half")
+			@half_user_list = ScraperTestsHelper.load_result_list("UserScraper", "half")
 		end
 
 		it "repository number is 2" do
@@ -56,8 +43,8 @@ describe UserScraper do
 
 	context "full users page" do
 		before (:all) do
-			@full_page_scraper = create_scraper_of_stub_url("full")
-			@full_user_list = load_user_list("full")
+			@full_page_scraper = ScraperTestsHelper.create_scraper_of_stub_url("UserScraper", "full")
+			@full_user_list = ScraperTestsHelper.load_result_list("UserScraper", "full")
 		end			
 		
 		it "user number is 7755" do
@@ -69,7 +56,7 @@ describe UserScraper do
 		end
 
 		it "all users equal to full_repository_list" do
-# too large for test
+# TODO: too large for test, should replace with a smaller repository list
 #			@full_page_scraper.all_elements.should == @full_repository_list * 2
 		end
 	end

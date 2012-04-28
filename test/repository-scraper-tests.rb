@@ -1,24 +1,12 @@
-require File.dirname(__FILE__) + "/../src/repository-scraper"
-require File.dirname(__FILE__) + "/stub-search-url"
+require File.dirname(__FILE__) + "/scraper-tests-helper"
 
 describe RepositoryScraper do
-
-	def create_scraper_of_stub_url(fixture_name)
-		RepositoryScraper.new(StubSearchURL.new("#{File.dirname(__FILE__)}/fixture/#{fixture_name}_repository_page.html")) 
-	end
-
-	def load_repository_list(fixture_name)
-		File.open("#{File.dirname(__FILE__)}/fixture/#{fixture_name}_repository_list").readlines.collect {
- 			|line|
-			line.chomp
-		}
-	end
 
 	let(:dummy_page_index) {1}
 
 	context "blank repository page" do
 		before (:all) do
-			@blank_page_scraper = create_scraper_of_stub_url("blank") 
+			@blank_page_scraper = ScraperTestsHelper.create_scraper_of_stub_url("RepositoryScraper", "blank")
 		end
 
 		it "repository number is 0" do
@@ -36,8 +24,8 @@ describe RepositoryScraper do
 
 	context "half repositories page" do
 		before (:all) do
-			@half_page_scraper = create_scraper_of_stub_url("half")
-			@half_repository_list = load_repository_list("half")
+			@half_page_scraper = ScraperTestsHelper.create_scraper_of_stub_url("RepositoryScraper", "half")
+			@half_repository_list = ScraperTestsHelper.load_result_list("RepositoryScraper", "half")
 		end
 
 		it "repository number is 18" do
@@ -55,8 +43,8 @@ describe RepositoryScraper do
 
 	context "full repositories page" do
 		before (:all) do
-			@full_page_scraper = create_scraper_of_stub_url("full")
-			@full_repository_list = load_repository_list("full")
+			@full_page_scraper = ScraperTestsHelper.create_scraper_of_stub_url("RepositoryScraper", "full")
+			@full_repository_list = ScraperTestsHelper.load_result_list("RepositoryScraper", "full")
 		end			
 		
 		it "repository number is 40" do

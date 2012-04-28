@@ -27,7 +27,6 @@ class Scraper
 	def all_elements
 		(1..page_number).inject([]){
 			|elements, page_index|
-
 			elements + single_page_elements(page_index)
 		}
 	end
