@@ -4,59 +4,31 @@ describe RepositoryScraper do
 
 	let(:dummy_page_index) {1}
 
-	context "blank repository page" do
-		before (:all) do
-			@blank_page_scraper = ScraperTestsHelper.create_scraper_of_stub_url("RepositoryScraper", "blank")
+	cases = {
+		"blank" => 0,
+		"half" => 18,
+		"full" => 40
+	}
+
+	cases.each do |fixture, expected_repository_number|
+
+		context "when #{fixture} respository page" do
+
+			before (:all) do
+				@scraper = ScraperTestsHelper.create_scraper_of_stub_url("RepositoryScraper", fixture)
+				@repository_list = ScraperTestsHelper.load_result_list("RepositoryScraper", fixture)
+			end		
+
+			it "repository number should be #{expected_repository_number}" do
+				@scraper.element_number.should == expected_repository_number
+			end
+
+			it "single page repositories should be #{fixture}_repository_list" do
+				@scraper.single_page_elements(1).should == @repository_list
+			end
+
 		end
 
-		it "repository number is 0" do
-			@blank_page_scraper.element_number.should == 0
-		end
-
-		it "single page repositories is []" do
-			@blank_page_scraper.single_page_elements(1).should == []
-		end
-
-		it "all repositories is []" do
-			@blank_page_scraper.all_elements.should == []
-		end
 	end
 
-	context "half repositories page" do
-		before (:all) do
-			@half_page_scraper = ScraperTestsHelper.create_scraper_of_stub_url("RepositoryScraper", "half")
-			@half_repository_list = ScraperTestsHelper.load_result_list("RepositoryScraper", "half")
-		end
-
-		it "repository number is 18" do
-			@half_page_scraper.element_number.should == 18
-		end
-
-		it "single page repositories equal to half_repository_list" do
-			@half_page_scraper.single_page_elements(dummy_page_index).should == @half_repository_list
-		end
-
-		it "all repositories equal to half_repository_list" do
-			@half_page_scraper.all_elements.should == @half_repository_list
-		end
-	end
-
-	context "full repositories page" do
-		before (:all) do
-			@full_page_scraper = ScraperTestsHelper.create_scraper_of_stub_url("RepositoryScraper", "full")
-			@full_repository_list = ScraperTestsHelper.load_result_list("RepositoryScraper", "full")
-		end			
-		
-		it "repository number is 40" do
-			@full_page_scraper.element_number.should == 40
-		end
-
-		it "single page repositories equal to full_repository_list" do
-			@full_page_scraper.single_page_elements(dummy_page_index).should == @full_repository_list
-		end
-
-		it "all repositories equal to full_repository_list" do
-			@full_page_scraper.all_elements.should == @full_repository_list * 2
-		end
-	end
 end
