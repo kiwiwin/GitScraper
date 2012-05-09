@@ -1,10 +1,9 @@
-require 'rubygems'
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 
 task :default => [:spec]
 
-Spec::Rake::SpecTask.new(:spec) do |t|
-	t.spec_files = Dir.glob('spec/**/*-spec.rb')
-	t.spec_opts << '--format specdoc'
-  	t.rcov = true
+RSpec::Core::RakeTask.new(:spec) do |t|
+	t.rspec_opts = %w{--color --format progress}
+	t.pattern = 'spec/*-spec.rb'
 end
+
