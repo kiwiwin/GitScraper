@@ -7,10 +7,10 @@ describe SearchFilter do
 
 		attribute_name_list.inject(true) {
 			|prev_attribute_status, attribute|
-
+			
 			prev_attribute_status \
-			&& methods.include?("#{attribute}")\
-			&& methods.include?("#{attribute}=")
+			&& methods.include?(attribute.to_sym)\
+			&& methods.include?("#{attribute}=".to_sym)
 		}		
 	end
 
@@ -58,7 +58,7 @@ describe SearchFilter do
 			expect_criterias = ["language", "size", "forks", 
 									  "fork", "pushed", "username",
 									  "created", "followres", "actions"]
-			check_attribute(@repository_filter, expect_criterias)
+			check_attribute(@repository_filter, expect_criterias).should == true
 		end
 
 		it "type is Repositories" do
