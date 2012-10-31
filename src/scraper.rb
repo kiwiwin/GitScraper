@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'nokogiri'
 
 class Scraper
 
@@ -7,13 +8,13 @@ class Scraper
 	end
 
 	def element_number
-		content = open(@url.search_url).read
-		content.match(element_number_match)[1].to_i
+		page = Nokogiri::HTML(open(@url.search_url))
+		page.css("div[class=title]").text.scan(/\((\d+)\)/).flatten[0].to_i
 	end
 
 	def single_page_elements(page_index)
-		content = open(@url.single_page_url(page_index)).read
-		content.scan(element_match).flatten
+		page = Nokogiri::HTML(open(@url.single_page_url(page_index)))
+		page.css("h2[class=title]").css("a").collect { |element| element["href"][1..-1] }
 	end
 
 	def page_number
@@ -28,14 +29,6 @@ class Scraper
 		(1..page_number).inject([]) do |elements, page_index|
 			elements + single_page_elements(page_index)
 		end
-	end
-
-	def element_match
-		%r{<h2\s+class\s*=\s*"title"\s*>\s*<a\s+href\s*=\s*"/(.*)"\s*>}
-	end
-
-	def element_number_match
-		%r{<div\s+class\s*=\s*"title"\s*>\w+ \((\d+)\)</div\s*>}
 	end
 
 end
