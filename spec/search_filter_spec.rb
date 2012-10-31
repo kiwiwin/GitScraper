@@ -1,5 +1,4 @@
-require File.dirname(__FILE__) + "/../src/user-search-filter"
-require File.dirname(__FILE__) + "/../src/repository-search-filter"
+require_relative "spec_helper"
 
 describe SearchFilter do
 	def check_attribute(class_instance, attribute_name_list)

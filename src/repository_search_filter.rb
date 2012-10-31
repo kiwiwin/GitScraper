@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/search-filter"
+require File.dirname(__FILE__) + "/search_filter"
 
 class RepositorySearchFilter < SearchFilter
 	attr_accessor :language

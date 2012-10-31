@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/scraper-tests-helper"
+require_relative "spec_helper"
 
 describe UserScraper do
 	
