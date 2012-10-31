@@ -30,5 +30,14 @@ class Scraper
 			elements + single_page_elements(page_index)
 		}
 	end
+
+	def element_match
+		%r{<h2\s+class\s*=\s*"title"\s*>\s*<a\s+href\s*=\s*"/(.*)"\s*>}
+	end
+
+	def element_number_match
+		%r{<div\s+class\s*=\s*"title"\s*>\w+ \((\d+)\)</div\s*>}
+	end
+
 end
 

@@ -1,6 +1,6 @@
 require_relative "spec_helper"
 
-describe UserScraper do
+describe Scraper do
 	
 	let(:dummy_page_index) {1}
 
@@ -15,8 +15,8 @@ describe UserScraper do
 		context "when #{fixture} user page" do
 
 			before (:all) do
-				@scraper = ScraperTestsHelper.create_scraper_of_stub_url("UserScraper", fixture)
-				@user_list = ScraperTestsHelper.load_result_list("UserScraper", fixture)
+				@scraper = ScraperTestsHelper.create_scraper_of_stub_url(:user, fixture)
+				@user_list = ScraperTestsHelper.load_result_list(:user, fixture)
 			end
 
 			it "user number should be #{expected_user_number}" do

@@ -1,6 +1,6 @@
 require_relative "spec_helper"
 
-describe RepositoryScraper do
+describe Scraper do
 
 	let(:dummy_page_index) {1}
 
@@ -15,8 +15,8 @@ describe RepositoryScraper do
 		context "when #{fixture} respository page" do
 
 			before (:all) do
-				@scraper = ScraperTestsHelper.create_scraper_of_stub_url("RepositoryScraper", fixture)
-				@repository_list = ScraperTestsHelper.load_result_list("RepositoryScraper", fixture)
+				@scraper = ScraperTestsHelper.create_scraper_of_stub_url(:repository, fixture)
+				@repository_list = ScraperTestsHelper.load_result_list(:repository, fixture)
 			end		
 
 			it "repository number should be #{expected_repository_number}" do
